@@ -31,6 +31,9 @@
     }
   }
 </script>
+<svelte:head>
+    <title>Contactmin - Message from {data.submission.name}</title>
+</svelte:head>
 
 <div id="fadeIn">
   <Button

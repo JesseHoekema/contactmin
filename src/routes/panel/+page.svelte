@@ -31,6 +31,9 @@
     }
   }
 </script>
+<svelte:head>
+    <title>Contactmin - Inbox</title>
+</svelte:head>
 
 <div class="m-6">
   <div class="mt-4 mb-6 flex items-center justify-between" id="fadeIn">

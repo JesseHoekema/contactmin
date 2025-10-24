@@ -39,6 +39,9 @@
         }
     }
 </script>
+<svelte:head>
+    <title>Contactmin - Login</title>
+</svelte:head>
 
 <div id="fadeInUp">
     <Card.Root class="w-full max-w-sm mx-auto mt-20">
