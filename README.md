@@ -10,7 +10,6 @@ The easy and modern contact form dashboard — built with **SvelteKit**, **Prism
 3. [Requirements](#requirements)
 4. [How to Use](#how-to-use)
 5. [Configuration](#configuration)
-6. [Deployment](#deployment)
 7. [Problems or Ideas?](#problems-or-ideas)
 8. [License](#license)
 
@@ -60,3 +59,16 @@ Example `.env` setup:
 ```env
 DATABASE_URL="mysql://user:password@host:port/dbname"
 TURNSTILE_SECRET="your_turnstile_secret"
+```
+
+also make sure to add an user in the User table in the db
+
+
+## Problems or Ideas?
+
+If you have a problem or idea, feel free to:
+
+- Open an issue
+- Create a pull request with your fix or feature
+
+We’ll be happy to help!
