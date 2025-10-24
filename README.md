@@ -1,38 +1,62 @@
-# sv
+# Contactmin
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+The easy and modern contact form dashboard — built with **SvelteKit**, **Prisma**, **TypeScript**, and **Tailwind CSS**.
 
-## Creating a project
+---
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Table of Contents
+1. [What is this?](#what-is-this)
+2. [Features](#features)
+3. [Requirements](#requirements)
+4. [How to Use](#how-to-use)
+5. [Configuration](#configuration)
+6. [Deployment](#deployment)
+7. [Problems or Ideas?](#problems-or-ideas)
+8. [License](#license)
 
-```sh
-# create a new project in the current directory
-npx sv create
+---
 
-# create a new project in my-app
-npx sv create my-app
-```
+## What is this?
 
-## Developing
+**Contactmin** is a simple API and dashboard solution for handling contact form submissions from your website.  
+Instead of building a backend for every site, you can use Contactmin as your centralized form handler with a clean dashboard to view and manage messages.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+---
 
-```sh
-npm run dev
+## Features
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- Simple and clean dashboard built with **SvelteKit**
+- Full **TypeScript** + **Prisma** setup
+- Works out-of-the-box with **MySQL**, but easily adaptable to other databases
+- Optional **Cloudflare Turnstile** spam protection
+- Ready to deploy to **Vercel** (or any other host)
+- CORS support — limit access to only your allowed domains
 
-## Building
+---
 
-To create a production version of your app:
+## Requirements
 
-```sh
-npm run build
-```
+- Basic knowledge of **TypeScript** and **Prisma**
+- A place to host it (Vercel is the easiest and free)
+- A database (MySQL by default — can be changed in `schema.prisma`)
 
-You can preview the production build with `npm run preview`.
+---
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## How to Use
+
+1. **Fork** this repository and name it however you like  
+2. Edit whatever you need (e.g., Prisma schema, UI, etc.)
+3. Rename `.env.example` → `.env` and fill in your configuration values
+4. If you don’t need Turnstile, remove it from the send API route and `.env` file
+5. Open `hooks.server.ts` and edit the `allowedOrigins` array to match your domain(s)
+6. **Deploy** it on your hosting provider (Vercel recommended)
+
+---
+
+## Configuration
+
+Example `.env` setup:
+
+```env
+DATABASE_URL="mysql://user:password@host:port/dbname"
+TURNSTILE_SECRET="your_turnstile_secret"
