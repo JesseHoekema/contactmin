@@ -12,15 +12,26 @@
 
   async function deleteSubmission(id: number) {
     try {
-      const res = await fetch("/api/actions/delete", {
+      const promise = fetch("/api/actions/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),
+      }).then(async (res) => {
+        if (!res.ok) throw new Error(await res.text());
+        return res;
       });
 
-      if (res.ok) {
-        toast.success("Message deleted successfully");
-        goto("/panel");
+    toast.promise(
+      promise,
+      {
+        loading: 'Deleting message...',
+        success: 'Message deleted successfully',
+        error: 'Failed to delete message'
+      }
+    );
+    const res = await promise;
+    if (res.ok) {
+      goto("/panel");
       } else {
         toast.error("Failed to delete message");
         console.error("Failed to delete message:", await res.text());
