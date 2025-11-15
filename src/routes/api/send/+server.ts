@@ -46,24 +46,22 @@ export const POST: RequestHandler = async ({ request }) => {
         });
 
         try {
-            // Full text for the app (stored in DB / shown in the UI)
-            const fullMessage = `New contact form submission
-
-Name: ${name.trim()}
-Email: ${email.trim()}
-Message:
-${message.trim()}`;
-
-            // Notification should include only the message (no name or email)
             const ntfyBody = message.trim();
 
             try {
+                const dashboardBase = (process.env.CONTACTMIN_DASHBOARD_URL ?? process.env.SITE_BASE_URL ?? 'https://your-site.example').replace(/\/+$/, '');
+                const dashboardUrl = `${dashboardBase}/panel/read/${submission.id}`;
+
+
+                const ntfyBody = message.trim();
+
                 const ntfyRes = await fetch(process.env.NTFY_SH_URL ?? '', {
                     method: 'POST',
                     headers: {
-                        'Title': `${name.trim()} - Contactmin`,
+                        'Title': `${name.trim()} - ${email.trim()}`,
                         'Priority': 'high',
-                        'Content-Type': 'text/plain; charset=utf-8'
+                        'Content-Type': 'text/plain; charset=utf-8',
+                        'Click': dashboardUrl
                     },
                     body: ntfyBody
                 });
