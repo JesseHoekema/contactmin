@@ -45,6 +45,36 @@ export const POST: RequestHandler = async ({ request }) => {
             message: message.trim()
         });
 
+        try {
+            const ntfyBody = `New contact form submission
+
+        Name: ${name.trim()}
+        Email: ${email.trim()}
+        Message:
+        ${message.trim()}`;
+
+            try {
+                const ntfyRes = await fetch(process.env.NTFY_SH_URL ?? '', {
+                    method: 'POST',
+                    headers: {
+                        'Title': 'Contact Form',
+                        'Priority': 'high',
+                        'Content-Type': 'text/plain; charset=utf-8'
+                    },
+                    body: ntfyBody
+                });
+
+                if (!ntfyRes.ok) {
+                    const text = await ntfyRes.text().catch(() => '');
+                    console.error('ntfy.sh responded with non-OK status:', ntfyRes.status, text);
+                }
+            } catch (ntfyErr) {
+                console.error('Error sending to ntfy.sh:', ntfyErr);
+            }
+        } catch (err) {
+            // noop - keep outer catch handling DB errors
+        }
+
         return json(
             {
                 success: true,
