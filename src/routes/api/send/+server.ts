@@ -46,18 +46,22 @@ export const POST: RequestHandler = async ({ request }) => {
         });
 
         try {
-            const ntfyBody = `New contact form submission
+            // Full text for the app (stored in DB / shown in the UI)
+            const fullMessage = `New contact form submission
 
-        Name: ${name.trim()}
-        Email: ${email.trim()}
-        Message:
-        ${message.trim()}`;
+Name: ${name.trim()}
+Email: ${email.trim()}
+Message:
+${message.trim()}`;
+
+            // Notification should include only the message (no name or email)
+            const ntfyBody = message.trim();
 
             try {
                 const ntfyRes = await fetch(process.env.NTFY_SH_URL ?? '', {
                     method: 'POST',
                     headers: {
-                        'Title': 'Contact Form',
+                        'Title': `${name.trim()} - Contactmin`,
                         'Priority': 'high',
                         'Content-Type': 'text/plain; charset=utf-8'
                     },
